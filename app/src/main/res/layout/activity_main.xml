@@ -21,7 +21,8 @@
             android:layout_height="wrap_content"
             android:background="@color/colorPrimaryDark"
             android:text="Accelerometer"
-            android:textColor="@android:color/white"/>
+            android:textColor="@android:color/white"
+            android:onClick="openGraphActivity"/>
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -58,7 +59,8 @@
             android:layout_height="wrap_content"
             android:background="@color/colorPrimaryDark"
             android:text="Light"
-            android:textColor="@android:color/white"/>
+            android:textColor="@android:color/white"
+            android:onClick="openGraphActivity"/>
 
         <LinearLayout
             android:layout_width="wrap_content"

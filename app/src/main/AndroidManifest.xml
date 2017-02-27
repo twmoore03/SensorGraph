@@ -15,6 +15,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".graphActivity">
+
+        </activity>
+        <activity android:name=".AccelGraph">
+
+        </activity>
+        <activity android:name=".LightGraph">
+
+        </activity>
     </application>
 
     <uses-feature android:name="android.hardware.sensor.accelerometer" android:required="true"/>

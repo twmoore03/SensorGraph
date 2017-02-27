@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">SensorGraphs</string>
+    <string name="accelSensorPresent">Status: Accelerometer is present</string>
+    <string name="accelSensorAbsent">Status: Accelerometer is not present</string>
+    <string name="lightSensorPresent">Status: Light sensor is present</string>
+    <string name="lightSensorAbsent">Status: Light sensor is not present</string>
 </resources>
