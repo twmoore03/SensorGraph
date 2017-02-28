@@ -85,7 +85,7 @@
                     android:id="@+id/yValue4"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="60"
+                    android:text="80"
                     android:layout_weight="1"
                     android:layout_marginBottom="35dp"
                     android:layout_marginTop="0dp"/>
@@ -94,7 +94,7 @@
                     android:id="@+id/yValue3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="45"
+                    android:text="60"
                     android:layout_weight="1"
                     android:layout_marginBottom="45dp"/>
 
@@ -102,7 +102,7 @@
                     android:id="@+id/yValue2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="30"
+                    android:text="40"
                     android:layout_weight="1"
                     android:layout_marginBottom="45dp"/>
 
@@ -110,7 +110,7 @@
                     android:id="@+id/yValue1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="15"
+                    android:text="20"
                     android:layout_weight="1"
                     android:layout_marginBottom="34dp"/>
 
