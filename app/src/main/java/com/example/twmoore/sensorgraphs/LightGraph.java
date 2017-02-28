@@ -9,7 +9,9 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -27,6 +29,8 @@ public class LightGraph extends AppCompatActivity implements SensorEventListener
     private PlotView plotview;
     private float currentValue = 0;
     long lastTimeStamp;
+    long timePassed = 0;
+    int count = 1;
 
     //needed for the animation portion
     private AnimationDrawable animation;
@@ -44,6 +48,7 @@ public class LightGraph extends AppCompatActivity implements SensorEventListener
 
         plotview = (PlotView) findViewById(R.id.plotView);
         plotview.setSensorType("LIGHT");
+        displayDataEveryTenthOfASecond();
     }
 
     public void setupAndRegisterSensor() {
@@ -52,9 +57,32 @@ public class LightGraph extends AppCompatActivity implements SensorEventListener
         sm.registerListener(this, s, 1000);
     }
 
+    public void displayDataEveryTenthOfASecond() {;
+        TimerTask displayDataTask = new TimerTask() {
+            @Override
+            public void run() {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        count++;
+                        if (count % 2 == 0) {
+                            updateTimeLabel();
+                        }
+                        plotview.addPoint(currentValue);
+                        plotview.invalidate();
+                    }
+                });
+            }
+        };
+        Timer timer = new Timer();
+        timer.schedule(displayDataTask, 0, 100);
+    }
+
     @Override
     public void onSensorChanged(SensorEvent sensorEvent) {
-        if (sensorEvent.timestamp - lastTimeStamp >  100000000) {
+        timePassed = sensorEvent.timestamp - lastTimeStamp;
+
+        if (timePassed >  100000000) {
             lastTimeStamp = sensorEvent.timestamp;
 
             float x = sensorEvent.values[0];
@@ -62,9 +90,24 @@ public class LightGraph extends AppCompatActivity implements SensorEventListener
             float z = sensorEvent.values[2];
 
             currentValue = (float) (Math.sqrt(x * x + y * y + z * z));
-            plotview.addPoint(currentValue);
-            plotview.invalidate();
         }
+    }
+
+    public void updateTimeLabel() {
+        TextView labelZero = (TextView) findViewById(R.id.timeLabel0);
+        labelZero.setText(Integer.toString(count));
+
+        TextView labelTwo = (TextView) findViewById(R.id.timeLabel2);
+        labelTwo.setText(Integer.toString(count + 2));
+
+        TextView labelFour = (TextView) findViewById(R.id.timeLabel4);
+        labelFour.setText(Integer.toString(count + 4));
+
+        TextView labelSix = (TextView) findViewById(R.id.timeLabel6);
+        labelSix.setText(Integer.toString(count + 6));
+
+        TextView labelEight = (TextView) findViewById(R.id.timeLabel8);
+        labelEight.setText(Integer.toString(count + 8));
     }
 
     public void backButton(View v) {
