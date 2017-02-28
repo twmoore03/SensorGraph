@@ -85,11 +85,7 @@ public class LightGraph extends AppCompatActivity implements SensorEventListener
         if (timePassed >  100000000) {
             lastTimeStamp = sensorEvent.timestamp;
 
-            float x = sensorEvent.values[0];
-            float y = sensorEvent.values[1];
-            float z = sensorEvent.values[2];
-
-            currentValue = (float) (Math.sqrt(x * x + y * y + z * z));
+            currentValue = sensorEvent.values[0];
             Log.v("LIGHT", Float.toString(currentValue));
 
         }

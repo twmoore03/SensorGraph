@@ -2,6 +2,7 @@ package com.example.twmoore.sensorgraphs;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.drawable.AnimationDrawable;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
@@ -64,6 +65,7 @@ public class AccelGraph extends AppCompatActivity implements SensorEventListener
                         if (count % 2 == 0) {
                             updateTimeLabel();
                         }
+                        animateTextColor();
                         plotview.addPoint(currentValue);
                         plotview.invalidate();
                     }
@@ -72,6 +74,17 @@ public class AccelGraph extends AppCompatActivity implements SensorEventListener
         };
         Timer timer = new Timer();
         timer.schedule(displayDataTask, 0, 100);
+    }
+
+    public void animateTextColor() {
+        TextView animatedText = (TextView) findViewById(R.id.animatedText);
+        if (currentValue <= 10) {
+            animatedText.setTextColor(Color.BLACK);
+        } else if (currentValue <= 20) {
+            animatedText.setTextColor(Color.YELLOW);
+        } else {
+            animatedText.setTextColor(Color.RED);
+        }
     }
 
     @Override
@@ -86,7 +99,6 @@ public class AccelGraph extends AppCompatActivity implements SensorEventListener
             float z = sensorEvent.values[2];
 
             currentValue = (float) (Math.sqrt(x * x + y * y + z * z));
-            //Log.v("ACCEL", Float.toString(currentValue));
         }
     }
 

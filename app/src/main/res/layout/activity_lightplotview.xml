@@ -68,7 +68,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_gravity="bottom"
-                    android:text="Data (x100 lx)"
+                    android:text="Data (x10 lx)"
                     android:gravity="bottom"
                     android:layout_marginTop="80dp"
                     />
