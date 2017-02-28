@@ -2,7 +2,6 @@ package com.example.twmoore.sensorgraphs;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.drawable.AnimationDrawable;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -15,10 +14,6 @@ import android.widget.TextView;
 
 import java.util.Timer;
 import java.util.TimerTask;
-import java.util.concurrent.Executor;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
 
 /**
  * Created by twmoore on 2/26/2017.
@@ -31,12 +26,6 @@ public class LightGraph extends AppCompatActivity implements SensorEventListener
     long lastTimeStamp;
     long timePassed = 0;
     int count = 1;
-
-    //needed for the animation portion
-    private AnimationDrawable animation;
-    //private Handler handler = new Handler();
-    private int frameCount = 0;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

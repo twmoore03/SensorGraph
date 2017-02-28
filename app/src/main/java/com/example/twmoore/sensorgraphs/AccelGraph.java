@@ -3,14 +3,12 @@ package com.example.twmoore.sensorgraphs;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
-import android.graphics.drawable.AnimationDrawable;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -28,11 +26,6 @@ public class AccelGraph extends AppCompatActivity implements SensorEventListener
     long lastTimeStamp;
     long timePassed = 0;
     int count = 1;
-
-    //needed for the animation portion
-    private AnimationDrawable animation;
-    //private Handler handler = new Handler();
-    private int frameCount = 0;
 
 
     @Override
