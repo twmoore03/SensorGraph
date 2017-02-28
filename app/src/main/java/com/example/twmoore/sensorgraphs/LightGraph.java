@@ -41,7 +41,7 @@ public class LightGraph extends AppCompatActivity implements SensorEventListener
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_plotview);
+        setContentView(R.layout.activity_lightplotview);
 
         setupAndRegisterSensor();
         lastTimeStamp = 0;
@@ -90,6 +90,8 @@ public class LightGraph extends AppCompatActivity implements SensorEventListener
             float z = sensorEvent.values[2];
 
             currentValue = (float) (Math.sqrt(x * x + y * y + z * z));
+            Log.v("LIGHT", Float.toString(currentValue));
+
         }
     }
 

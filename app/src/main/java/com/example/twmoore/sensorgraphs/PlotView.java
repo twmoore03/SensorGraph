@@ -67,6 +67,14 @@ public class PlotView extends View {
         }
     }
 
+    private void scaleYAxis() {
+        if (sensorType.equals("ACCELEROMETER")) {
+
+        } else {
+
+        }
+    }
+
     public void plotSensorStatistics(int index, Canvas c) {
         plotDataValues(index, c);
         plotMeans(index, c);
@@ -79,7 +87,7 @@ public class PlotView extends View {
         point.setStrokeWidth(STROKE_WIDTH);
 
         float currentX = index * xUnit;
-        float currentY = c.getHeight() - dataPoints.get(index) * scaledY;
+        float currentY = c.getHeight() -  dataPoints.get(index) * scaledY;
         c.drawCircle(currentX, currentY, POINT_SIZE, point);
 
         if (index < 9) {
@@ -124,9 +132,9 @@ public class PlotView extends View {
     public void determineYScale(Canvas canvas) {
         scaledY = 0;
         if (sensorType.equals("ACCELEROMETER")) {
-            scaledY = (float) canvas.getHeight() / 35;
+            scaledY = (float) canvas.getHeight() / 40;
         } else {
-            scaledY = (float) canvas.getHeight() / 7000;
+            scaledY = (float) canvas.getHeight() / 6000;
         }
     }
 

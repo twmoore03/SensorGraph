@@ -86,6 +86,7 @@ public class AccelGraph extends AppCompatActivity implements SensorEventListener
             float z = sensorEvent.values[2];
 
             currentValue = (float) (Math.sqrt(x * x + y * y + z * z));
+            //Log.v("ACCEL", Float.toString(currentValue));
         }
     }
 
