@@ -57,7 +57,7 @@ public class PlotView extends View {
     }
 
     public void plotSensor(Canvas c) {
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 10; i++) {
             if (sensorType.equals("ACCELEROMETER")) {
                 plotSensorStatistics(i, c);
             } else {
@@ -81,7 +81,7 @@ public class PlotView extends View {
         float currentY = c.getHeight() - dataPoints.get(index) * scaledY;
         c.drawCircle(currentX, currentY, POINT_SIZE, point);
 
-        if (index < 4) {
+        if (index < 9) {
             float nextX = (index + 1) * xUnit;
             float nextY = c.getHeight() - dataPoints.get(index + 1) * scaledY;
             c.drawLine(currentX, currentY, nextX, nextY, point);
@@ -97,7 +97,7 @@ public class PlotView extends View {
         float currentY = c.getHeight() - calculateMean(index) * scaledY;
         c.drawCircle(currentX, currentY, POINT_SIZE, pMean);
 
-        if (index < 4) {
+        if (index < 9) {
             float nextX = (index + 1) * xUnit;
             float nextY = c.getHeight() - calculateMean(index + 1) * scaledY;
             c.drawLine(currentX, currentY, nextX, nextY, pMean);
@@ -113,7 +113,7 @@ public class PlotView extends View {
         float currentY = c.getHeight() - calculateStandardDeviation(index) * scaledY;
         c.drawCircle(currentX, currentY, POINT_SIZE, pStandardDeviation);
 
-        if (index < 4) {
+        if (index < 9) {
             float nextX = (index + 1) * xUnit;
             float nextY = c.getHeight() - calculateStandardDeviation(index + 1) * scaledY;
             c.drawLine(currentX, currentY, nextX, nextY, pStandardDeviation);
@@ -125,7 +125,7 @@ public class PlotView extends View {
         if (sensorType.equals("ACCELEROMETER")) {
             scaledY = (float) canvas.getHeight() / 35;
         } else {
-            scaledY = (float) canvas.getHeight() / 33000;
+            scaledY = (float) canvas.getHeight() / 7000;
         }
     }
 
@@ -133,15 +133,17 @@ public class PlotView extends View {
         Paint gridPaint = new Paint();
         gridPaint.setColor(Color.BLACK);
 
-        for (int i = 0; i < 5; i++) {
-            c.drawLine(i * xUnit, 0, i * xUnit, c.getHeight(), gridPaint);
-            c.drawLine(0, i * yUnit, c.getWidth(), i * yUnit, gridPaint);
+        for (int i = 0; i < 9; i++) {
+            //vertical lines
+            c.drawLine(i * xUnit * 2, 0, i * xUnit * 2, c.getHeight(), gridPaint);
+            //horizontal lines
+            c.drawLine(0, i * yUnit * 2, c.getWidth(), i * yUnit * 2, gridPaint);
         }
     }
 
     public void determineXAndYUnits(Canvas c) {
-        xUnit = c.getWidth() / 4;
-        yUnit = c.getHeight() / 4;
+        xUnit = c.getWidth() / 8;
+        yUnit = c.getHeight() / 8;
     }
 
     public void clearList(List list) {
@@ -149,15 +151,15 @@ public class PlotView extends View {
     }
 
     public void initializeEmptyDataList() {
-        dataPoints = new ArrayList<>(5);
+        dataPoints = new ArrayList<>(10);
 
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 10; i++) {
             dataPoints.add((float) 0);
         }
     }
 
     public void addPoint(float newPoint) {
-        if (dataPoints.size() >= 5) {
+        if (dataPoints.size() >= 10) {
             dataPoints.remove(0);
         }
         dataPoints.add(newPoint);

@@ -14,20 +14,68 @@
 
     <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="center_horizontal">
+
 
         <TextView
-            android:id="@+id/datalabel"
+            android:id="@+id/valuesKey"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Data"/>
+            android:text="Values"
+            android:layout_gravity="center_horizontal"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:textColor="#00FF00" />
+
+        <TextView
+            android:id="@+id/meanKey"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Mean"
+            android:paddingRight="20dp"
+            android:layout_gravity="center_horizontal"
+            android:textColor="#0000FF" />
+
+        <TextView
+            android:id="@+id/stdDevKey"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Std Dev"
+            android:layout_gravity="center_horizontal"
+            android:textColor="#FFFF00" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/plotViewLayout"
+        android:layout_width="270dp"
+        android:layout_height="270dp"
+        android:layout_gravity="center_horizontal">
 
         <com.example.twmoore.sensorgraphs.PlotView
             android:id="@+id/plotView"
-            android:layout_height="240dp"
-            android:layout_width="270dp"
-            android:background="#CCCCCC"/>
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:background="#FFFFFF"/>
     </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
+
+        <Button
+            android:id="@+id/backButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Back"
+            android:background="@android:color/holo_blue_dark"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:onClick="backButton"/>
+
+    </RelativeLayout>
 
 
 </LinearLayout>

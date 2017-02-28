@@ -21,7 +21,6 @@ public class AccelGraph extends AppCompatActivity implements SensorEventListener
     private PlotView plotview;
     private float currentValue = 0;
     long lastTimeStamp;
-    private final long OneSecondInNanoSeconds = 1000000000;
 
     //needed for the animation portion
     private AnimationDrawable animation;
@@ -49,7 +48,7 @@ public class AccelGraph extends AppCompatActivity implements SensorEventListener
 
     @Override
     public void onSensorChanged(SensorEvent sensorEvent) {
-        if (sensorEvent.timestamp - lastTimeStamp >  OneSecondInNanoSeconds) {
+        if (sensorEvent.timestamp - lastTimeStamp >  100000000) {
             lastTimeStamp = sensorEvent.timestamp;
 
             float x = sensorEvent.values[0];
