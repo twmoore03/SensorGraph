@@ -123,9 +123,9 @@ public class PlotView extends View {
     public void determineYScale(Canvas canvas) {
         scaledY = 0;
         if (sensorType.equals("ACCELEROMETER")) {
-            scaledY = (float) canvas.getHeight() / 19;
+            scaledY = (float) canvas.getHeight() / 35;
         } else {
-            scaledY = (float) canvas.getHeight() / 30000;
+            scaledY = (float) canvas.getHeight() / 33000;
         }
     }
 
