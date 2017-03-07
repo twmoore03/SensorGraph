@@ -5,7 +5,6 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.View;
 
 import java.util.ArrayList;
@@ -67,14 +66,6 @@ public class PlotView extends View {
         }
     }
 
-    private void scaleYAxis() {
-        if (sensorType.equals("ACCELEROMETER")) {
-
-        } else {
-
-        }
-    }
-
     public void plotSensorStatistics(int index, Canvas c) {
         plotDataValues(index, c);
         plotMeans(index, c);
@@ -132,9 +123,9 @@ public class PlotView extends View {
     public void determineYScale(Canvas canvas) {
         scaledY = 0;
         if (sensorType.equals("ACCELEROMETER")) {
-            scaledY = (float) canvas.getHeight() / 40;
+            scaledY = (float) canvas.getHeight() / 80;
         } else {
-            scaledY = (float) canvas.getHeight() / 600;
+            scaledY = (float) canvas.getHeight() / 2000;
         }
     }
 

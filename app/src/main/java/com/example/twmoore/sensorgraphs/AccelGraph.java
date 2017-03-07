@@ -2,7 +2,7 @@ package com.example.twmoore.sensorgraphs;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
+import android.graphics.drawable.AnimationDrawable;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -10,6 +10,7 @@ import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.Timer;
@@ -26,19 +27,23 @@ public class AccelGraph extends AppCompatActivity implements SensorEventListener
     long lastTimeStamp;
     long timePassed = 0;
     int count = 1;
+    ImageView runningImage;
+    AnimationDrawable runningAnimation;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_plotview);
+        setContentView(R.layout.activity_graph_plotview);
 
         setupAndRegisterSensor();
         lastTimeStamp = 0;
+        setupRunningAnimation();
 
         plotview = (PlotView) findViewById(R.id.plotView);
         plotview.setSensorType("ACCELEROMETER");
         displayDataEveryTenthOfASecond();
+        startRunningAnimation();
     }
 
     public void setupAndRegisterSensor() {
@@ -58,7 +63,6 @@ public class AccelGraph extends AppCompatActivity implements SensorEventListener
                         if (count % 2 == 0) {
                             updateTimeLabel();
                         }
-                        animateTextColor();
                         plotview.addPoint(currentValue);
                         plotview.invalidate();
                     }
@@ -69,20 +73,20 @@ public class AccelGraph extends AppCompatActivity implements SensorEventListener
         timer.schedule(displayDataTask, 0, 100);
     }
 
-    public void animateTextColor() {
-        TextView animatedText = (TextView) findViewById(R.id.animatedText);
-        if (currentValue <= 10) {
-            animatedText.setTextColor(Color.BLACK);
-        } else if (currentValue <= 20) {
-            animatedText.setTextColor(Color.YELLOW);
-        } else {
-            animatedText.setTextColor(Color.RED);
-        }
+    public void setupRunningAnimation() {
+        runningImage = (ImageView) findViewById(R.id.runningAnimation);
+        runningImage.setBackgroundResource(R.drawable.running_anim);
+        runningAnimation = (AnimationDrawable) runningImage.getBackground();
+    }
+
+    public void startRunningAnimation() {
+        runningAnimation.start();
     }
 
     @Override
     public void onSensorChanged(SensorEvent sensorEvent) {
         timePassed = sensorEvent.timestamp - lastTimeStamp;
+
         if (timePassed >  100000000) {
             lastTimeStamp = sensorEvent.timestamp;
 
