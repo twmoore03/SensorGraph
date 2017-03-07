@@ -9,6 +9,7 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -26,9 +27,10 @@ public class AccelGraph extends AppCompatActivity implements SensorEventListener
     private float currentValue = 0;
     long lastTimeStamp;
     long timePassed = 0;
+    long lastSecond = 0;
+    long secondPassed;
     int count = 1;
-    ImageView runningImage;
-    AnimationDrawable runningAnimation;
+
 
 
     @Override
@@ -38,12 +40,10 @@ public class AccelGraph extends AppCompatActivity implements SensorEventListener
 
         setupAndRegisterSensor();
         lastTimeStamp = 0;
-        setupRunningAnimation();
 
         plotview = (PlotView) findViewById(R.id.plotView);
         plotview.setSensorType("ACCELEROMETER");
         displayDataEveryTenthOfASecond();
-        startRunningAnimation();
     }
 
     public void setupAndRegisterSensor() {
@@ -73,23 +73,32 @@ public class AccelGraph extends AppCompatActivity implements SensorEventListener
         timer.schedule(displayDataTask, 0, 100);
     }
 
-    public void setupRunningAnimation() {
-        runningImage = (ImageView) findViewById(R.id.runningAnimation);
-        runningImage.setBackgroundResource(R.drawable.running_anim);
-        runningAnimation = (AnimationDrawable) runningImage.getBackground();
-    }
-
     public void startRunningAnimation() {
-        runningAnimation.start();
+        ImageView runningImage = (ImageView) findViewById(R.id.runningAnimation);
+
+        if (currentValue >= 15) {
+            runningImage.setBackgroundResource(R.drawable.running_anim);
+            AnimationDrawable runningAnimation = (AnimationDrawable) runningImage.getBackground();
+            runningAnimation.start();
+        } else {
+            runningImage.setBackgroundResource(R.drawable.walking_anim);
+            AnimationDrawable walkingAnimation = (AnimationDrawable) runningImage.getBackground();
+            walkingAnimation.start();
+        }
     }
 
     @Override
     public void onSensorChanged(SensorEvent sensorEvent) {
         timePassed = sensorEvent.timestamp - lastTimeStamp;
 
+        secondPassed = sensorEvent.timestamp - lastSecond;
         if (timePassed >  100000000) {
             lastTimeStamp = sensorEvent.timestamp;
 
+            if (secondPassed >= 2000000000) {
+                lastSecond = sensorEvent.timestamp;
+                startRunningAnimation();
+            }
 
             float x = sensorEvent.values[0];
             float y = sensorEvent.values[1];
