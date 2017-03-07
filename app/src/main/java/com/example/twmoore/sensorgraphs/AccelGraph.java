@@ -9,7 +9,6 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -76,7 +75,7 @@ public class AccelGraph extends AppCompatActivity implements SensorEventListener
     public void startRunningAnimation() {
         ImageView runningImage = (ImageView) findViewById(R.id.runningAnimation);
 
-        if (currentValue >= 15) {
+        if (currentValue >= 13) {
             runningImage.setBackgroundResource(R.drawable.running_anim);
             AnimationDrawable runningAnimation = (AnimationDrawable) runningImage.getBackground();
             runningAnimation.start();
@@ -95,7 +94,7 @@ public class AccelGraph extends AppCompatActivity implements SensorEventListener
         if (timePassed >  100000000) {
             lastTimeStamp = sensorEvent.timestamp;
 
-            if (secondPassed >= 2000000000) {
+            if (secondPassed >= 500000000) {
                 lastSecond = sensorEvent.timestamp;
                 startRunningAnimation();
             }
